@@ -15,7 +15,7 @@ report.xml
 **/*.out
 out/
 release/
-acictl
+server
 
 # Project-local glide cache, RE: https://github.com/Masterminds/glide/issues/736
 .glide/
