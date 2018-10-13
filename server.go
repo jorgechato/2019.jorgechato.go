@@ -15,8 +15,8 @@ import (
 )
 
 var (
-	version           = "1.0"
-	tag               = ""
+	VERSION           = "1.0"
+	TAG               = ""
 	author            = "jorgechato"
 	port              = "8080"
 	host              = ""
@@ -27,8 +27,8 @@ var (
 	address           = fmt.Sprintf("%v:%v", host, port)
 	info              = map[string]string{
 		"Build User":   "@" + author,
-		"Version":      "v" + version,
-		"Version desc": "v" + tag,
+		"Version":      "v" + VERSION,
+		"Version desc": "v" + TAG,
 		"Server":       "http://" + address,
 	}
 	start = time.Now()
