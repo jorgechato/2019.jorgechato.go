@@ -5,14 +5,16 @@ PLATFORM:=$(shell go env GOOS)
 ARCH:=$(shell go env GOARCH)
 GOPATH:=$(shell go env GOPATH)
 GOBIN:=$(GOPATH)/bin
-LDFLAGS:="-X github.com/jorgechato/2019.jorgechato.go/server.VERSION=${MAIN_VERSION}"
-LDFLAGS:=${LDFLAGS}+" -X github.com/jorgechato/2019.jorgechato.go/server.AUTHOR=${AUTHOR}"
+LDFLAGS:="-X github.com/jorgechato/2019.jorgechato.go/utils.VERSION=${MAIN_VERSION} -X github.com/jorgechato/2019.jorgechato.go/utils.AUTHOR=${AUTHOR}"
 M = $(shell printf "\033[34;1m▶\033[0m")
 
 
-.PHONY: build clean dep schema help default server setup
+.PHONY: build clean dep schema help default server setup vendor
 
 default: help
+
+vendor: ; $(info $(M) Download dev dependencies...)
+	go get github.com/oxequa/realize
 
 setup: ; $(info $(M) Fetching github.com/golang/dep...)
 	go get github.com/golang/dep/cmd/dep
@@ -29,8 +31,9 @@ dep: setup ; $(info $(M) Ensuring vendored dependencies are up-to-date...) ## Do
 schema: dep ; $(info $(M) Embedding schema files into binary...) ## Build schema
 	go generate ./schema
 
-server: schema ; $(info $(M) Starting development server...) ## Start development server
-	go run server.go
+server: vendor schema ; $(info $(M) Starting development server...) ## Start development server
+	realize start
+	# go run -ldflags ${LDFLAGS} server.go
 
 help: ## Show this help.
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'

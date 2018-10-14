@@ -12,21 +12,17 @@ import (
 
 	"github.com/jorgechato/2019.jorgechato.go/api"
 	"github.com/jorgechato/2019.jorgechato.go/metrics"
+	. "github.com/jorgechato/2019.jorgechato.go/utils"
 )
 
 var (
-	VERSION           = "1.0"
-	TAG               = ""
-	author            = "jorgechato"
-	port              = "8080"
-	host              = ""
 	idleTimeout       = time.Second * 60
 	writeTimeout      = time.Second * 10
 	readHeaderTimeout = time.Second * 1
 	maxHeaderBytes    = http.DefaultMaxHeaderBytes
-	address           = fmt.Sprintf("%v:%v", host, port)
+	address           = fmt.Sprintf("%v:%v", HOST, PORT)
 	info              = map[string]string{
-		"Build User":   "@" + author,
+		"Build User":   "@" + AUTHOR,
 		"Version":      "v" + VERSION,
 		"Version desc": "v" + TAG,
 		"Server":       "http://" + address,

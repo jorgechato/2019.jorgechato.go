@@ -14,11 +14,13 @@ type User struct {
 }
 
 type SocialNetwork struct {
+	ID   uint   `json:"id,omitempty"`
 	Name string `json:"name"`
 	Url  string `json:"url"`
 }
 
 type Skill struct {
+	ID       uint     `json:"id,omitempty"`
 	Category string   `json:"category"`
 	Content  []string `json:"content"`
 }

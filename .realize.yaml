@@ -1,0 +1,25 @@
+settings:
+  legacy:
+    force: true
+    interval: 100ms
+schema:
+- name: 2019.jorgechato.go
+  path: .
+  commands:
+    test:
+      status: true
+    run:
+      status: true
+  watcher:
+    extensions:
+    - go
+    - lock
+    - toml
+    - graphql
+    paths:
+    - /
+    ignored_paths:
+    - .git
+    - .realize
+    - vendor
+    - out
