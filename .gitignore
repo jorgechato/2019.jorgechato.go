@@ -12,6 +12,7 @@ coverage*
 test.xml
 report.xml
 .scannerwork
+*.xml
 
 # Output of the go coverage tool, specifically when used with LiteIDE
 **/*.out
@@ -19,6 +20,7 @@ out/
 tmp/
 release/
 server
+*.output
 
 # Project-local glide cache, RE: https://github.com/Masterminds/glide/issues/736
 .glide/

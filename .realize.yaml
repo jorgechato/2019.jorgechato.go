@@ -3,9 +3,13 @@ settings:
     force: true
     interval: 100ms
 schema:
-- name: 2019.jorgechato.go
+- name: api.jorgechato.com
   path: .
   commands:
+    clean:
+      status: true
+    fmt:
+      status: true
     test:
       status: true
     run:

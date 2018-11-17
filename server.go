@@ -10,9 +10,9 @@ import (
 	"os/signal"
 	"time"
 
-	"github.com/jorgechato/2019.jorgechato.go/api"
-	"github.com/jorgechato/2019.jorgechato.go/metrics"
-	. "github.com/jorgechato/2019.jorgechato.go/utils"
+	"github.com/jorgechato/api.jorgechato.com/api"
+	"github.com/jorgechato/api.jorgechato.com/metrics"
+	. "github.com/jorgechato/api.jorgechato.com/utils"
 )
 
 var (

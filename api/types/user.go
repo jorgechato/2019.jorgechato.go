@@ -8,7 +8,6 @@ type User struct {
 	Password       string          `json:"-"`
 	Email          string          `json:"email"`
 	Role           string          `json:"role"`
-	Skills         []Skill         `json:"skills"`
 	SocialNetworks []SocialNetwork `json:"social_networks"`
 	Articles       []Article       `json:"articles"`
 }
@@ -17,12 +16,6 @@ type SocialNetwork struct {
 	ID   uint   `json:"id,omitempty"`
 	Name string `json:"name"`
 	Url  string `json:"url"`
-}
-
-type Skill struct {
-	ID       uint     `json:"id,omitempty"`
-	Category string   `json:"category"`
-	Content  []string `json:"content"`
 }
 
 func (u User) Save() {

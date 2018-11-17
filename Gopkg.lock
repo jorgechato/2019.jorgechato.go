@@ -14,25 +14,22 @@
   version = "v1.2.0"
 
 [[projects]]
-  branch = "master"
-  name = "github.com/graph-gophers/graphql-go"
+  name = "github.com/graphql-go/graphql"
   packages = [
     ".",
-    "errors",
-    "internal/common",
-    "internal/exec",
-    "internal/exec/packer",
-    "internal/exec/resolvable",
-    "internal/exec/selected",
-    "internal/query",
-    "internal/schema",
-    "internal/validation",
-    "introspection",
-    "log",
-    "relay",
-    "trace"
+    "gqlerrors",
+    "language/ast",
+    "language/kinds",
+    "language/lexer",
+    "language/location",
+    "language/parser",
+    "language/printer",
+    "language/source",
+    "language/typeInfo",
+    "language/visitor"
   ]
-  revision = "a2b6fc39dd10d826594c712173fb9cf1e0e446e8"
+  revision = "5c1be0872a56fba73b279434ea95dfda735abedd"
+  version = "v0.7.6"
 
 [[projects]]
   name = "github.com/matttproud/golang_protobuf_extensions"
@@ -41,23 +38,14 @@
   version = "v1.0.1"
 
 [[projects]]
-  name = "github.com/opentracing/opentracing-go"
-  packages = [
-    ".",
-    "ext",
-    "log"
-  ]
-  revision = "1949ddbfd147afd4d964a9f00b24eb291e0e7c38"
-  version = "v1.0.2"
-
-[[projects]]
   name = "github.com/prometheus/client_golang"
   packages = [
     "prometheus",
+    "prometheus/internal",
     "prometheus/promhttp"
   ]
-  revision = "c5b7fccd204277076155f10851dad72b76a49317"
-  version = "v0.8.0"
+  revision = "abad2d1bd44235a26707c172eab6bca5bf2dbad3"
+  version = "v0.9.1"
 
 [[projects]]
   branch = "master"
@@ -73,7 +61,7 @@
     "internal/bitbucket.org/ww/goautoneg",
     "model"
   ]
-  revision = "c7de2306084e37d54b8be01f3541a8464345e9a5"
+  revision = "1f2c4f3cd6db5fd6f68f36af6b6d5d936fd93c4e"
 
 [[projects]]
   branch = "master"
@@ -86,15 +74,9 @@
   ]
   revision = "185b4288413d2a0dd0806f78c90dde719829e5ae"
 
-[[projects]]
-  branch = "master"
-  name = "golang.org/x/net"
-  packages = ["context"]
-  revision = "49bb7cea24b1df9410e1712aa6433dae904ff66a"
-
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "43e2c3fb6745cfa3d40b1856005265159dde6ea9a480ad074220752afe1ff917"
+  inputs-digest = "ac3bab33ee7690743bb7e95dc4ee5b30a57431cd13f70bd6b1c94459315f8c40"
   solver-name = "gps-cdcl"
   solver-version = 1

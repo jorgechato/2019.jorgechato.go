@@ -26,8 +26,12 @@
 
 
 [[constraint]]
-  branch = "master"
-  name = "github.com/graph-gophers/graphql-go"
+  name = "github.com/graphql-go/graphql"
+  version = "0.7.6"
+
+[[constraint]]
+  name = "github.com/prometheus/client_golang"
+  version = "0.9.1"
 
 [prune]
   go-tests = true

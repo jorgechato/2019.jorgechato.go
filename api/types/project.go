@@ -1,6 +1,8 @@
 package types
 
-import "time"
+import (
+	"time"
+)
 
 type Project struct {
 	ID          uint      `json:"id,omitempty"`
