@@ -4,10 +4,12 @@ import (
 	"time"
 
 	"github.com/graphql-go/graphql"
+	"github.com/jinzhu/gorm"
 )
 
 type Event struct {
-	ID          uint      `json:"id,omitempty"`
+	gorm.Model
+	ID          string    `json:"id,omitempty"`
 	Title       string    `json:"title"`
 	Thumbmail   string    `json:"thumbnail"`
 	Url         string    `json:"url"`

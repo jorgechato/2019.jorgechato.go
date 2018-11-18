@@ -4,10 +4,12 @@ import (
 	"time"
 
 	"github.com/graphql-go/graphql"
+	"github.com/jinzhu/gorm"
 )
 
 type Experience struct {
-	ID          uint      `json:"id,omitempty"`
+	gorm.Model
+	ID          string    `json:"id,omitempty"`
 	Company     string    `json:"company"`
 	Position    string    `json:"position"`
 	Thumbmail   string    `json:"thumbnail"`
@@ -16,10 +18,6 @@ type Experience struct {
 	Start_at    time.Time `json:"start_at"`
 	End_at      time.Time `json:"end_at"`
 	Description string    `json:"description"`
-}
-
-func (e Experience) Save() {
-	// TODO: save model
 }
 
 var ExperienceType = graphql.NewObject(graphql.ObjectConfig{

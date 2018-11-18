@@ -4,13 +4,15 @@ import (
 	"time"
 
 	"github.com/graphql-go/graphql"
+	"github.com/jinzhu/gorm"
 )
 
 type Article struct {
-	ID           uint      `json:"id,omitempty"`
+	gorm.Model
+	ID           string    `json:"id,omitempty"`
 	Created_at   time.Time `json:"created_at"`
 	Title        string    `json:"title"`
-	Tags         []Tag     `json:"tags"`
+	Tags         []*Tag    `gorm:"many2many:article_tags json:"tags"`
 	Slug         string    `json:"slug"`
 	Content      string    `json:"content"`
 	Published_at time.Time `json:"published_at"`
@@ -19,8 +21,10 @@ type Article struct {
 }
 
 type Tag struct {
-	ID   uint   `json:"id,omitempty"`
-	Name string `json:"tag"`
+	gorm.Model
+	ID       string     `json:"id,omitempty"`
+	Name     string     `json:"tag"`
+	Articles []*Article `gorm:"many2many:article_tags json:"articles"`
 }
 
 var ArticleType = graphql.NewObject(graphql.ObjectConfig{

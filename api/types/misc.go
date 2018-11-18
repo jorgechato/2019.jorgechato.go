@@ -4,10 +4,12 @@ import (
 	"time"
 
 	"github.com/graphql-go/graphql"
+	"github.com/jinzhu/gorm"
 )
 
 type Misc struct {
-	ID           uint      `json:"id,omitempty"`
+	gorm.Model
+	ID           string    `json:"id,omitempty"`
 	Created_at   time.Time `json:"created_at"`
 	Title        string    `json:"title"`
 	Url          string    `json:"url"`
