@@ -25,6 +25,7 @@ var (
 	readHeaderTimeout = time.Second * 1
 	maxHeaderBytes    = http.DefaultMaxHeaderBytes
 	address           = fmt.Sprintf("%v:%v", HOST, PORT)
+	hiddenAddress     = fmt.Sprintf("%v:%v", HOST, HIDDENPORT)
 	info              = map[string]string{
 		"Build User":   "@" + AUTHOR,
 		"Version":      "v" + VERSION,
@@ -54,8 +55,21 @@ func main() {
 		MaxHeaderBytes:    maxHeaderBytes,
 	}
 
+	hiddenServer := &http.Server{
+		Addr:              hiddenAddress,
+		Handler:           metrics.Build(),
+		ReadHeaderTimeout: readHeaderTimeout,
+		WriteTimeout:      writeTimeout,
+		IdleTimeout:       idleTimeout,
+		MaxHeaderBytes:    maxHeaderBytes,
+	}
+
 	go func() {
 		log.Fatal(server.ListenAndServe())
+	}()
+
+	go func() {
+		log.Fatal(hiddenServer.ListenAndServe())
 	}()
 
 	metrics.RampUpTime.Set(
@@ -71,5 +85,6 @@ func main() {
 	ctx, cancel := context.WithTimeout(context.Background(), 2)
 	defer cancel()
 	server.Shutdown(ctx)
+	hiddenServer.Shutdown(ctx)
 	os.Exit(0)
 }

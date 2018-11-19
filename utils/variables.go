@@ -6,12 +6,13 @@ import (
 )
 
 var (
-	VERSION string = "1.0"
-	AUTHOR  string = ""
-	TAG     string = ""
-	PORT    string = "8080"
-	HOST    string = ""
-	DB      string
+	VERSION    string = "1.0"
+	AUTHOR     string = ""
+	TAG        string = ""
+	PORT       string = "8080"
+	HIDDENPORT string = "8081"
+	HOST       string = ""
+	DB         string
 
 	DATABASE_HOST     string = "localhost"
 	POSTGRES_USER     string = "jorge"

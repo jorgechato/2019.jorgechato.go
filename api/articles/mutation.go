@@ -6,6 +6,7 @@ import (
 	. "github.com/jorgechato/api.jorgechato.com/api/types"
 )
 
+// CreateArticle create an article
 func CreateArticle() (field *graphql.Field) {
 	field = &graphql.Field{
 		Type: ArticleType,
