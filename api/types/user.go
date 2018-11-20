@@ -1,10 +1,7 @@
 package types
 
-import "github.com/jinzhu/gorm"
-
 type User struct {
-	gorm.Model
-	ID             string           `json:"id,omitempty"`
+	Model
 	Name           string           `json:"name"`
 	Thumbmail      string           `json:"thumbnail"`
 	Nick           string           `json:"nick"`
@@ -16,8 +13,7 @@ type User struct {
 }
 
 type SocialNetwork struct {
-	gorm.Model
-	ID   string `json:"id,omitempty"`
+	Model
 	Name string `json:"name"`
 	Url  string `json:"url"`
 }

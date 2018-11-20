@@ -4,26 +4,23 @@ import (
 	"time"
 
 	"github.com/graphql-go/graphql"
-	"github.com/jinzhu/gorm"
 )
 
 type Misc struct {
-	gorm.Model
-	ID           string    `json:"id,omitempty"`
-	Created_at   time.Time `json:"created_at"`
-	Title        string    `json:"title"`
-	Url          string    `json:"url"`
-	Content      string    `json:"content"`
-	Published_at time.Time `json:"published_at"`
-	Public       bool      `json:"public"`
-	Thumbmail    string    `json:"thumbnail"`
+	Model
+	Title       string    `json:"title"`
+	Url         string    `json:"url"`
+	Content     string    `json:"content"`
+	PublishedAt time.Time `json:"published_at"`
+	Public      bool      `json:"public"`
+	Thumbmail   string    `json:"thumbnail"`
 }
 
 var MiscType = graphql.NewObject(graphql.ObjectConfig{
 	Name: "Misc",
 	Fields: graphql.Fields{
 		"id": &graphql.Field{
-			Type: graphql.ID,
+			Type: graphql.Int,
 		},
 		"created_at": &graphql.Field{
 			Type: graphql.DateTime,

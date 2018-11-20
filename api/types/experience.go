@@ -4,19 +4,17 @@ import (
 	"time"
 
 	"github.com/graphql-go/graphql"
-	"github.com/jinzhu/gorm"
 )
 
 type Experience struct {
-	gorm.Model
-	ID          string    `json:"id,omitempty"`
+	Model
 	Company     string    `json:"company"`
 	Position    string    `json:"position"`
 	Thumbmail   string    `json:"thumbnail"`
 	Url         string    `json:"url"`
 	Location    string    `json:"location"`
-	Start_at    time.Time `json:"start_at"`
-	End_at      time.Time `json:"end_at"`
+	StartAt     time.Time `json:"start_at"`
+	EndAt       time.Time `json:"end_at"`
 	Description string    `json:"description"`
 }
 
@@ -24,7 +22,7 @@ var ExperienceType = graphql.NewObject(graphql.ObjectConfig{
 	Name: "Event",
 	Fields: graphql.Fields{
 		"id": &graphql.Field{
-			Type: graphql.ID,
+			Type: graphql.Int,
 		},
 		"company": &graphql.Field{
 			Type: graphql.String,

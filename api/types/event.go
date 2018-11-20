@@ -4,18 +4,16 @@ import (
 	"time"
 
 	"github.com/graphql-go/graphql"
-	"github.com/jinzhu/gorm"
 )
 
 type Event struct {
-	gorm.Model
-	ID          string    `json:"id,omitempty"`
+	Model
 	Title       string    `json:"title"`
 	Thumbmail   string    `json:"thumbnail"`
 	Url         string    `json:"url"`
 	Location    string    `json:"location"`
-	Start_at    time.Time `json:"start_at"`
-	End_at      time.Time `json:"end_at"`
+	StartAt     time.Time `json:"start_at"`
+	EndAt       time.Time `json:"end_at"`
 	Description string    `json:"description"`
 }
 
@@ -23,7 +21,7 @@ var EventType = graphql.NewObject(graphql.ObjectConfig{
 	Name: "Event",
 	Fields: graphql.Fields{
 		"id": &graphql.Field{
-			Type: graphql.ID,
+			Type: graphql.Int,
 		},
 		"title": &graphql.Field{
 			Type: graphql.String,

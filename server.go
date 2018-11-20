@@ -39,7 +39,10 @@ func init() {
 	db, _ := gorm.Open("postgres", DB)
 	defer db.Close()
 
-	db.AutoMigrate(&Article{})
+	db.AutoMigrate(
+		&Article{},
+		&Tag{},
+	)
 }
 
 func main() {

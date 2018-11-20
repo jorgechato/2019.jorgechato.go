@@ -26,12 +26,12 @@ func GetArticleByID() (field *graphql.Field) {
 		Type: ArticleType,
 		Args: graphql.FieldConfigArgument{
 			"id": &graphql.ArgumentConfig{
-				Type: graphql.NewNonNull(graphql.ID),
+				Type: graphql.NewNonNull(graphql.String),
 			},
 		},
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-			var article Article
-			article.Title = "hello world"
+
+			article := getArticleByID(p.Args["id"].(string))
 
 			return article, nil
 		},

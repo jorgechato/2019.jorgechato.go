@@ -18,11 +18,19 @@ func getArticles() []Article {
 	return articles
 }
 
-func createArticle(article Article) Article {
+func getArticleByID(id string) Article {
 	db, _ := gorm.Open("postgres", DB)
 	defer db.Close()
 
-	db.Create(&article)
+	var article Article
+	db.First(&article, "id = ?", id)
 
 	return article
+}
+
+func createArticle(article *Article) {
+	db, _ := gorm.Open("postgres", DB)
+	defer db.Close()
+
+	db.Create(article)
 }
