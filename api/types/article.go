@@ -48,12 +48,6 @@ var ArticleType = graphql.NewObject(graphql.ObjectConfig{
 		},
 		"slug": &graphql.Field{
 			Type: graphql.String,
-			Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-				if obj, ok := p.Source.(Article); ok == true {
-					return slugify(obj.Title), nil
-				}
-				return nil, nil
-			},
 		},
 		"content": &graphql.Field{
 			Type: graphql.String,

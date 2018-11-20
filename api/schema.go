@@ -11,9 +11,10 @@ func buildSchema() (schema graphql.Schema) {
 	rootQuery := graphql.NewObject(graphql.ObjectConfig{
 		Name: "Query",
 		Fields: graphql.Fields{
-			"misc":     misc.GetMisc(),
+			"miscs":    misc.GetMisc(),
 			"articles": articles.GetArticles(),
 			"article":  articles.GetArticleByID(),
+			"misc":     misc.GetMiscByID(),
 		},
 	})
 
@@ -21,6 +22,8 @@ func buildSchema() (schema graphql.Schema) {
 		Name: "RootMutation",
 		Fields: graphql.Fields{
 			"createArticle": articles.CreateArticle(),
+			"createMisc":    misc.CreateMisc(),
+			"updateMisc":    misc.UpdateMisc(),
 		},
 	})
 

@@ -39,8 +39,13 @@ func CreateArticle() (field *graphql.Field) {
 			article.Content = p.Args["content"].(string)
 			article.Public = p.Args["public"].(bool)
 
-			time, _ := time.Parse(time.RFC3339, p.Args["published_at"].(string))
-			article.PublishedAt = time
+			switch arg := p.Args["published_at"].(type) {
+			case string:
+				time, _ := time.Parse(time.RFC3339, arg)
+				article.PublishedAt = time
+			case time.Time:
+				article.PublishedAt = arg
+			}
 
 			if obj, ok := p.Args["thumbnail"].(string); ok == true {
 				article.Thumbmail = obj
