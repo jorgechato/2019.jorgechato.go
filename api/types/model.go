@@ -1,16 +1,18 @@
 package types
 
 import (
+	"crypto/md5"
+	"encoding/hex"
+	"fmt"
 	"regexp"
 	"strings"
 	"time"
 
 	"github.com/jinzhu/gorm"
-	"github.com/satori/go.uuid"
 )
 
 type Model struct {
-	ID        string    `gorm:"primary_key;type:char(36);column:id" json:"id"`
+	ID        string    `gorm:"primary_key;type:char(32);column:id" json:"id"`
 	CreatedAt time.Time `json:"created_at"`
 }
 
@@ -27,6 +29,21 @@ func init() {
 }
 
 func (model *Model) BeforeCreate(scope *gorm.Scope) error {
-	scope.SetColumn("id", uuid.Must(uuid.NewV4()).String())
+	hasher := md5.New()
+	hasher.Write(
+		[]byte(
+			fmt.Sprintf(
+				"%v:%v",
+				model.CreatedAt,
+				time.Now().UnixNano(),
+			),
+		),
+	)
+
+	scope.SetColumn(
+		"id",
+		hex.EncodeToString(hasher.Sum(nil)),
+	)
+
 	return nil
 }

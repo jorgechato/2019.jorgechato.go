@@ -8,12 +8,15 @@ import (
 	. "github.com/jorgechato/api.jorgechato.com/utils"
 )
 
-func getArticles() []Article {
+func getArticles(first, offset int) []Article {
 	db, _ := gorm.Open("postgres", DB)
 	defer db.Close()
 
 	var articles []Article
-	db.Find(&articles)
+	db.Order("published_at desc").
+		Offset(offset).
+		Limit(first).
+		Find(&articles)
 
 	return articles
 }

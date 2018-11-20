@@ -1,7 +1,6 @@
 package articles
 
 import (
-	"log"
 	"time"
 
 	"github.com/graphql-go/graphql"
@@ -24,13 +23,12 @@ func CreateArticle() (field *graphql.Field) {
 				Type: graphql.String,
 			},
 			"public": &graphql.ArgumentConfig{
-				Type: graphql.Boolean,
-			},
-			"slug": &graphql.ArgumentConfig{
-				Type: graphql.String,
+				Type:         graphql.Boolean,
+				DefaultValue: false,
 			},
 			"published_at": &graphql.ArgumentConfig{
-				Type: graphql.DateTime,
+				Type:         graphql.DateTime,
+				DefaultValue: time.Now(),
 			},
 		},
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
@@ -39,18 +37,14 @@ func CreateArticle() (field *graphql.Field) {
 
 			article.Title = p.Args["title"].(string)
 			article.Content = p.Args["content"].(string)
+			article.Public = p.Args["public"].(bool)
 
-			if obj, ok := p.Args["public"].(bool); ok == true {
-				article.Public = obj
-			}
+			time, _ := time.Parse(time.RFC3339, p.Args["published_at"].(string))
+			article.PublishedAt = time
+
 			if obj, ok := p.Args["thumbnail"].(string); ok == true {
 				article.Thumbmail = obj
 			}
-			if obj, ok := p.Args["published_at"].(time.Time); ok == true {
-				article.PublishedAt = obj
-			}
-			_, ok := p.Args["published_at"].(time.Time)
-			log.Println(ok)
 
 			createArticle(&article)
 

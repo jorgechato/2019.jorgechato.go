@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/graphql-go/graphql"
+	"github.com/jinzhu/gorm"
 )
 
 type Article struct {
@@ -15,6 +16,15 @@ type Article struct {
 	PublishedAt time.Time `json:"published_at"`
 	Public      bool      `json:"public"`
 	Thumbmail   string    `json:"thumbnail"`
+}
+
+func (article *Article) BeforeSave(scope *gorm.Scope) error {
+	scope.SetColumn(
+		"slug",
+		slugify(article.Title),
+	)
+
+	return nil
 }
 
 var ArticleType = graphql.NewObject(graphql.ObjectConfig{
@@ -38,6 +48,12 @@ var ArticleType = graphql.NewObject(graphql.ObjectConfig{
 		},
 		"slug": &graphql.Field{
 			Type: graphql.String,
+			Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+				if obj, ok := p.Source.(Article); ok == true {
+					return slugify(obj.Title), nil
+				}
+				return nil, nil
+			},
 		},
 		"content": &graphql.Field{
 			Type: graphql.String,
