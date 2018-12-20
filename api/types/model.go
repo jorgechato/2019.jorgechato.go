@@ -22,12 +22,6 @@ func slugify(s string) string {
 	return strings.Trim(re.ReplaceAllString(strings.ToLower(s), "-"), "-")
 }
 
-func init() {
-	gorm.DefaultTableNameHandler = func(db *gorm.DB, defaultTableName string) string {
-		return "go_" + defaultTableName
-	}
-}
-
 func (model *Model) BeforeCreate(scope *gorm.Scope) error {
 	hasher := md5.New()
 	hasher.Write(
