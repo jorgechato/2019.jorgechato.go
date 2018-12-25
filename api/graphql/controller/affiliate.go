@@ -1,20 +1,19 @@
-package affiliates
+package controller
 
 import (
 	"strings"
 
 	"github.com/graphql-go/graphql"
 
-	"github.com/jorgechato/api.jorgechato.com/api/buckets"
-	"github.com/jorgechato/api.jorgechato.com/api/tags"
+	"github.com/jorgechato/api.jorgechato.com/api/service"
 	. "github.com/jorgechato/api.jorgechato.com/api/types"
 )
 
-func delete(p graphql.ResolveParams) (interface{}, error) {
-	affiliate := getAffiliateByID(p.Args["id"].(string))
+func DeleteAffiliate(p graphql.ResolveParams) (interface{}, error) {
+	affiliate := service.GetAffiliateByID(p.Args["id"].(string))
 
 	if affiliate.ID != "" {
-		deleteAffiliate(&affiliate)
+		service.DeleteAffiliate(&affiliate)
 
 		return affiliate, nil
 	}
@@ -22,14 +21,14 @@ func delete(p graphql.ResolveParams) (interface{}, error) {
 	return nil, nil
 }
 
-func get(p graphql.ResolveParams) (interface{}, error) {
-	affiliate := getAffiliateByID(p.Args["id"].(string))
+func GetAffiliate(p graphql.ResolveParams) (interface{}, error) {
+	affiliate := service.GetAffiliateByID(p.Args["id"].(string))
 
 	return affiliate, nil
 }
 
-func getList(p graphql.ResolveParams) (interface{}, error) {
-	articles := getAffiliates(
+func GetAffiliates(p graphql.ResolveParams) (interface{}, error) {
+	articles := service.GetAffiliates(
 		p.Args["first"].(int),
 		p.Args["offset"].(int),
 	)
@@ -37,7 +36,7 @@ func getList(p graphql.ResolveParams) (interface{}, error) {
 	return articles, nil
 }
 
-func create(p graphql.ResolveParams) (interface{}, error) {
+func CreateAffiliate(p graphql.ResolveParams) (interface{}, error) {
 	var affiliate Affiliate
 	var bucket Bucket
 
@@ -45,6 +44,7 @@ func create(p graphql.ResolveParams) (interface{}, error) {
 	affiliate.Url = p.Args["url"].(string)
 	affiliate.Public = p.Args["public"].(bool)
 	affiliate.Thumbmail = p.Args["thumbnail"].(string)
+	affiliate.Score = p.Args["score"].(int)
 
 	if obj, ok := p.Args["preview"].(string); ok == true {
 		affiliate.Preview = obj
@@ -52,21 +52,21 @@ func create(p graphql.ResolveParams) (interface{}, error) {
 
 	if objs, ok := p.Args["tags"].([]interface{}); ok == true {
 		for _, obj := range objs {
-			tag := tags.GetTagByName(strings.ToLower(obj.(string)))
+			tag := service.GetTagByName(strings.ToLower(obj.(string)))
 			affiliate.Tags = append(affiliate.Tags, &tag)
 		}
 	}
 
-	bucket = buckets.GetBucketByName(strings.ToLower(p.Args["bucket"].(string)))
+	bucket = service.GetBucketByName(strings.ToLower(p.Args["bucket"].(string)))
 	bucket.Affiliates = append(bucket.Affiliates, &affiliate)
 
-	createAffiliate(&affiliate)
-	buckets.UpdateBucket(&bucket)
+	service.CreateAffiliate(&affiliate)
+	service.UpdateBucket(&bucket)
 
 	return affiliate, nil
 }
 
-func update(p graphql.ResolveParams) (interface{}, error) {
+func UpdateAffiliate(p graphql.ResolveParams) (interface{}, error) {
 	var affiliate Affiliate
 	var bucket Bucket
 
@@ -79,6 +79,7 @@ func update(p graphql.ResolveParams) (interface{}, error) {
 	affiliate.Url = p.Args["url"].(string)
 	affiliate.Public = p.Args["public"].(bool)
 	affiliate.Thumbmail = p.Args["thumbnail"].(string)
+	affiliate.Score = p.Args["score"].(int)
 
 	if obj, ok := p.Args["preview"].(string); ok == true {
 		affiliate.Preview = obj
@@ -86,16 +87,16 @@ func update(p graphql.ResolveParams) (interface{}, error) {
 
 	if objs, ok := p.Args["tags"].([]interface{}); ok == true {
 		for _, obj := range objs {
-			tag := tags.GetTagByName(strings.ToLower(obj.(string)))
+			tag := service.GetTagByName(strings.ToLower(obj.(string)))
 			affiliate.Tags = append(affiliate.Tags, &tag)
 		}
 	}
 
-	bucket = buckets.GetBucketByName(strings.ToLower(p.Args["bucket"].(string)))
+	bucket = service.GetBucketByName(strings.ToLower(p.Args["bucket"].(string)))
 	bucket.Affiliates = append(bucket.Affiliates, &affiliate)
 
-	updateAffiliate(&affiliate)
-	buckets.UpdateBucket(&bucket)
+	service.UpdateAffiliate(&affiliate)
+	service.UpdateBucket(&bucket)
 
 	return affiliate, nil
 }

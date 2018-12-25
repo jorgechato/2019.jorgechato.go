@@ -3,39 +3,41 @@ package api
 import (
 	"github.com/graphql-go/graphql"
 
-	"github.com/jorgechato/api.jorgechato.com/api/affiliates"
-	"github.com/jorgechato/api.jorgechato.com/api/articles"
-	"github.com/jorgechato/api.jorgechato.com/api/misc"
+	"github.com/jorgechato/api.jorgechato.com/api/graphql/mutation"
+	"github.com/jorgechato/api.jorgechato.com/api/graphql/query"
 )
 
 func buildSchema() (schema graphql.Schema) {
 	rootQuery := graphql.NewObject(graphql.ObjectConfig{
 		Name: "Query",
 		Fields: graphql.Fields{
-			"articles": articles.GetArticles(),
-			"article":  articles.GetArticleByID(),
+			"articles": query.GetArticles(),
+			"article":  query.GetArticleByID(),
 
-			"affiliates": affiliates.GetAffiliates(),
-			"affiliate":  affiliates.GetAffiliateByID(),
+			"buckets": query.GetBuckets(),
+			"bucket":  query.GetBucketByID(),
 
-			"miscs": misc.GetMisc(),
-			"misc":  misc.GetMiscByID(),
+			"affiliates": query.GetAffiliates(),
+			"affiliate":  query.GetAffiliateByID(),
+
+			"miscs": query.GetMisc(),
+			"misc":  query.GetMiscByID(),
 		},
 	})
 
 	rootMutation := graphql.NewObject(graphql.ObjectConfig{
 		Name: "RootMutation",
 		Fields: graphql.Fields{
-			"createArticle": articles.CreateArticle(),
-			"updateArticle": articles.UpdateArticle(),
-			"deleteArticle": articles.DeleteArticle(),
+			"createArticle": mutation.CreateArticle(),
+			"updateArticle": mutation.UpdateArticle(),
+			"deleteArticle": mutation.DeleteArticle(),
 
-			"createAffiliate": affiliates.CreateAffiliate(),
-			"updateAffiliate": affiliates.UpdateAffiliate(),
-			"deleteAffiliate": affiliates.DeleteAffiliate(),
+			"createAffiliate": mutation.CreateAffiliate(),
+			"updateAffiliate": mutation.UpdateAffiliate(),
+			"deleteAffiliate": mutation.DeleteAffiliate(),
 
-			"createMisc": misc.CreateMisc(),
-			"updateMisc": misc.UpdateMisc(),
+			"createMisc": mutation.CreateMisc(),
+			"updateMisc": mutation.UpdateMisc(),
 		},
 	})
 

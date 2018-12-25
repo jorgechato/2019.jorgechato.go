@@ -1,4 +1,4 @@
-package articles
+package controller
 
 import (
 	"strings"
@@ -6,15 +6,15 @@ import (
 
 	"github.com/graphql-go/graphql"
 
-	"github.com/jorgechato/api.jorgechato.com/api/tags"
+	"github.com/jorgechato/api.jorgechato.com/api/service"
 	. "github.com/jorgechato/api.jorgechato.com/api/types"
 )
 
-func delete(p graphql.ResolveParams) (interface{}, error) {
-	article := getArticleByID(p.Args["id"].(string))
+func DeleteArticle(p graphql.ResolveParams) (interface{}, error) {
+	article := service.GetArticleByID(p.Args["id"].(string))
 
 	if article.ID != "" {
-		deleteArticle(&article)
+		service.DeleteArticle(&article)
 
 		return article, nil
 	}
@@ -22,14 +22,14 @@ func delete(p graphql.ResolveParams) (interface{}, error) {
 	return nil, nil
 }
 
-func get(p graphql.ResolveParams) (interface{}, error) {
-	article := getArticleByID(p.Args["id"].(string))
+func GetArticle(p graphql.ResolveParams) (interface{}, error) {
+	article := service.GetArticleByID(p.Args["id"].(string))
 
 	return article, nil
 }
 
-func getList(p graphql.ResolveParams) (interface{}, error) {
-	articles := getArticles(
+func GetArticles(p graphql.ResolveParams) (interface{}, error) {
+	articles := service.GetArticles(
 		p.Args["first"].(int),
 		p.Args["offset"].(int),
 	)
@@ -37,7 +37,7 @@ func getList(p graphql.ResolveParams) (interface{}, error) {
 	return articles, nil
 }
 
-func create(p graphql.ResolveParams) (interface{}, error) {
+func CreateArticle(p graphql.ResolveParams) (interface{}, error) {
 	var article Article
 
 	article.Title = p.Args["title"].(string)
@@ -58,17 +58,17 @@ func create(p graphql.ResolveParams) (interface{}, error) {
 
 	if objs, ok := p.Args["tags"].([]interface{}); ok == true {
 		for _, obj := range objs {
-			tag := tags.GetTagByName(strings.ToLower(obj.(string)))
+			tag := service.GetTagByName(strings.ToLower(obj.(string)))
 			article.Tags = append(article.Tags, &tag)
 		}
 	}
 
-	createArticle(&article)
+	service.CreateArticle(&article)
 
 	return article, nil
 }
 
-func update(p graphql.ResolveParams) (interface{}, error) {
+func UpdateArticle(p graphql.ResolveParams) (interface{}, error) {
 	var article Article
 
 	article.ID = p.Args["id"].(string)
@@ -94,12 +94,12 @@ func update(p graphql.ResolveParams) (interface{}, error) {
 
 	if objs, ok := p.Args["tags"].([]interface{}); ok == true {
 		for _, obj := range objs {
-			tag := tags.GetTagByName(strings.ToLower(obj.(string)))
+			tag := service.GetTagByName(strings.ToLower(obj.(string)))
 			article.Tags = append(article.Tags, &tag)
 		}
 	}
 
-	updateArticle(&article)
+	service.UpdateArticle(&article)
 
 	return article, nil
 }

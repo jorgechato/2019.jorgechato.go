@@ -1,4 +1,4 @@
-package buckets
+package service
 
 import (
 	. "github.com/jorgechato/api.jorgechato.com/api/types"
@@ -28,4 +28,14 @@ func UpdateBucket(bucket *Bucket) {
 		Omit("created_at").
 		Omit("id").
 		Update(*bucket)
+}
+
+func GetBuckets() []Bucket {
+	var buckets []Bucket
+
+	Session.
+		Order("created_at desc").
+		Find(&buckets)
+
+	return buckets
 }

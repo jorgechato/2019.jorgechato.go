@@ -1,10 +1,9 @@
-package affiliates
+package schema
 
 import (
 	"github.com/graphql-go/graphql"
 
-	"github.com/jorgechato/api.jorgechato.com/api/buckets"
-	. "github.com/jorgechato/api.jorgechato.com/api/tags"
+	"github.com/jorgechato/api.jorgechato.com/api/service"
 	. "github.com/jorgechato/api.jorgechato.com/api/types"
 )
 
@@ -35,9 +34,6 @@ var AffiliateType = graphql.NewObject(graphql.ObjectConfig{
 		"preview": &graphql.Field{
 			Type: graphql.String,
 		},
-		"bucket": &graphql.Field{
-			Type: graphql.String,
-		},
 		"score": &graphql.Field{
 			Type: graphql.Int,
 		},
@@ -51,7 +47,7 @@ func init() {
 			Type: graphql.NewList(TagType),
 			Resolve: func(p graphql.ResolveParams) (interface{}, error) {
 				if obj, ok := p.Source.(Affiliate); ok == true {
-					obj.Tags = getTags(obj)
+					obj.Tags = service.GetTagsByAffiliate(obj)
 
 					return obj.Tags, nil
 				}
@@ -62,10 +58,10 @@ func init() {
 	AffiliateType.AddFieldConfig(
 		"bucket",
 		&graphql.Field{
-			Type: buckets.BucketType,
+			Type: BucketType,
 			Resolve: func(p graphql.ResolveParams) (interface{}, error) {
 				if obj, ok := p.Source.(Affiliate); ok == true {
-					return buckets.GetBucketByID(obj.Bucket), nil
+					return service.GetBucketByID(obj.Bucket), nil
 				}
 				return nil, nil
 			},

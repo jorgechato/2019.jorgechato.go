@@ -1,9 +1,9 @@
-package articles
+package schema
 
 import (
 	"github.com/graphql-go/graphql"
 
-	. "github.com/jorgechato/api.jorgechato.com/api/tags"
+	"github.com/jorgechato/api.jorgechato.com/api/service"
 	. "github.com/jorgechato/api.jorgechato.com/api/types"
 )
 
@@ -56,7 +56,7 @@ func init() {
 			Type: graphql.NewList(TagType),
 			Resolve: func(p graphql.ResolveParams) (interface{}, error) {
 				if obj, ok := p.Source.(Article); ok == true {
-					obj.Tags = getTags(obj)
+					obj.Tags = service.GetTagsByArticle(obj)
 
 					return obj.Tags, nil
 				}

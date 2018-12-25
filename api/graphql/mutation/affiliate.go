@@ -1,10 +1,13 @@
-package affiliates
+package mutation
 
 import (
 	"github.com/graphql-go/graphql"
+
+	"github.com/jorgechato/api.jorgechato.com/api/graphql/controller"
+	. "github.com/jorgechato/api.jorgechato.com/api/graphql/schema"
 )
 
-var arguments = graphql.FieldConfigArgument{
+var AffiliateArg = graphql.FieldConfigArgument{
 	"name": &graphql.ArgumentConfig{
 		Type: graphql.NewNonNull(graphql.String),
 	},
@@ -41,9 +44,9 @@ var arguments = graphql.FieldConfigArgument{
 func CreateAffiliate() (field *graphql.Field) {
 	field = &graphql.Field{
 		Type: AffiliateType,
-		Args: arguments,
+		Args: AffiliateArg,
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-			return create(p)
+			return controller.CreateAffiliate(p)
 		},
 	}
 
@@ -54,9 +57,9 @@ func CreateAffiliate() (field *graphql.Field) {
 func UpdateAffiliate() (field *graphql.Field) {
 	field = &graphql.Field{
 		Type: AffiliateType,
-		Args: arguments,
+		Args: AffiliateArg,
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-			return update(p)
+			return controller.UpdateAffiliate(p)
 		},
 	}
 
@@ -73,7 +76,7 @@ func DeleteAffiliate() (field *graphql.Field) {
 			},
 		},
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-			return delete(p)
+			return controller.DeleteAffiliate(p)
 		},
 	}
 

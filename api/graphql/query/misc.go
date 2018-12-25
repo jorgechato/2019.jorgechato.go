@@ -1,8 +1,9 @@
-package misc
+package query
 
 import (
 	"github.com/graphql-go/graphql"
 
+	"github.com/jorgechato/api.jorgechato.com/api/graphql/controller"
 	. "github.com/jorgechato/api.jorgechato.com/api/types"
 )
 
@@ -21,13 +22,7 @@ func GetMisc() (field *graphql.Field) {
 			},
 		},
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-
-			misc := getMiscList(
-				p.Args["first"].(int),
-				p.Args["offset"].(int),
-			)
-
-			return misc, nil
+			return controller.GetMiscs(p)
 		},
 	}
 
@@ -44,10 +39,7 @@ func GetMiscByID() (field *graphql.Field) {
 			},
 		},
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-
-			misc := getMiscByID(p.Args["id"].(string))
-
-			return misc, nil
+			return controller.GetMisc(p)
 		},
 	}
 

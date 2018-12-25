@@ -1,12 +1,15 @@
-package articles
+package mutation
 
 import (
 	"time"
 
 	"github.com/graphql-go/graphql"
+
+	"github.com/jorgechato/api.jorgechato.com/api/graphql/controller"
+	. "github.com/jorgechato/api.jorgechato.com/api/graphql/schema"
 )
 
-var arguments = graphql.FieldConfigArgument{
+var articleArg = graphql.FieldConfigArgument{
 	"title": {
 		Type: graphql.NewNonNull(graphql.String),
 	},
@@ -37,9 +40,9 @@ var arguments = graphql.FieldConfigArgument{
 func CreateArticle() (field *graphql.Field) {
 	field = &graphql.Field{
 		Type: ArticleType,
-		Args: arguments,
+		Args: articleArg,
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-			return create(p)
+			return controller.CreateArticle(p)
 		},
 	}
 
@@ -50,9 +53,9 @@ func CreateArticle() (field *graphql.Field) {
 func UpdateArticle() (field *graphql.Field) {
 	field = &graphql.Field{
 		Type: ArticleType,
-		Args: arguments,
+		Args: articleArg,
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-			return update(p)
+			return controller.UpdateArticle(p)
 		},
 	}
 
@@ -69,7 +72,7 @@ func DeleteArticle() (field *graphql.Field) {
 			},
 		},
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-			return delete(p)
+			return controller.DeleteArticle(p)
 		},
 	}
 

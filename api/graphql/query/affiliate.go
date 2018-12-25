@@ -1,13 +1,16 @@
-package articles
+package query
 
 import (
 	"github.com/graphql-go/graphql"
+
+	"github.com/jorgechato/api.jorgechato.com/api/graphql/controller"
+	. "github.com/jorgechato/api.jorgechato.com/api/graphql/schema"
 )
 
-// GetArticles get all articles
-func GetArticles() (field *graphql.Field) {
+// GetAffiliates get all Affiliates
+func GetAffiliates() (field *graphql.Field) {
 	field = &graphql.Field{
-		Type: graphql.NewList(ArticleType),
+		Type: graphql.NewList(AffiliateType),
 		Args: graphql.FieldConfigArgument{
 			"first": &graphql.ArgumentConfig{
 				Type:         graphql.Int,
@@ -19,24 +22,24 @@ func GetArticles() (field *graphql.Field) {
 			},
 		},
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-			return getList(p)
+			return controller.GetAffiliates(p)
 		},
 	}
 
 	return
 }
 
-// GetArticleByID get article by ID
-func GetArticleByID() (field *graphql.Field) {
+// GetAffiliateByID get Affiliate by ID
+func GetAffiliateByID() (field *graphql.Field) {
 	field = &graphql.Field{
-		Type: ArticleType,
+		Type: AffiliateType,
 		Args: graphql.FieldConfigArgument{
 			"id": &graphql.ArgumentConfig{
 				Type: graphql.NewNonNull(graphql.ID),
 			},
 		},
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-			return get(p)
+			return controller.GetAffiliate(p)
 		},
 	}
 

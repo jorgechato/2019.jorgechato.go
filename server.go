@@ -40,13 +40,13 @@ func init() {
 	defer db.Close()
 
 	// TODO: remove drop
-	db.DropTableIfExists(
-		&Article{},
-		&Bucket{},
-		&Tag{},
-		&Affiliate{},
-		&Misc{},
-	)
+	// db.DropTableIfExists(
+	// &Article{},
+	// &Bucket{},
+	// &Tag{},
+	// &Affiliate{},
+	// &Misc{},
+	// )
 
 	db.AutoMigrate(
 		&Article{},

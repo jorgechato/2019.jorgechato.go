@@ -1,4 +1,4 @@
-package buckets
+package schema
 
 import (
 	"github.com/graphql-go/graphql"
@@ -6,13 +6,13 @@ import (
 	. "github.com/jorgechato/api.jorgechato.com/api/types"
 )
 
-var BucketType = graphql.NewObject(graphql.ObjectConfig{
-	Name: "Bucket",
+var TagType = graphql.NewObject(graphql.ObjectConfig{
+	Name: "Tag",
 	Fields: graphql.Fields{
 		"id": &graphql.Field{
 			Type: graphql.NewNonNull(graphql.ID),
 			Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-				if obj, ok := p.Source.(Bucket); ok == true {
+				if obj, ok := p.Source.(Tag); ok == true {
 					return obj.ID, nil
 				}
 				return nil, nil

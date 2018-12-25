@@ -1,15 +1,15 @@
-package articles
+package service
 
 import (
 	. "github.com/jorgechato/api.jorgechato.com/api/types"
 )
 
-func deleteArticle(article *Article) {
+func DeleteArticle(article *Article) {
 	Session.
 		Delete(article)
 }
 
-func getArticles(first, offset int) []Article {
+func GetArticles(first, offset int) []Article {
 	var articles []Article
 
 	Session.
@@ -21,7 +21,7 @@ func getArticles(first, offset int) []Article {
 	return articles
 }
 
-func getArticleByID(id string) Article {
+func GetArticleByID(id string) Article {
 	var article Article
 
 	Session.First(&article, "id = ?", id)
@@ -29,24 +29,14 @@ func getArticleByID(id string) Article {
 	return article
 }
 
-func createArticle(article *Article) {
+func CreateArticle(article *Article) {
 	Session.Create(article)
 }
 
-func updateArticle(article *Article) {
+func UpdateArticle(article *Article) {
 	Session.
 		Model(article).
 		Omit("created_at").
 		Omit("id").
 		Update(*article)
-}
-
-func getTags(article Article) []*Tag {
-	var tags []*Tag
-
-	Session.
-		Model(&article).
-		Related(&tags, "Tags")
-
-	return tags
 }
