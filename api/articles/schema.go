@@ -3,6 +3,7 @@ package articles
 import (
 	"github.com/graphql-go/graphql"
 
+	. "github.com/jorgechato/api.jorgechato.com/api/tags"
 	. "github.com/jorgechato/api.jorgechato.com/api/types"
 )
 

@@ -3,7 +3,6 @@ package types
 import (
 	"strings"
 
-	"github.com/graphql-go/graphql"
 	"github.com/jinzhu/gorm"
 )
 
@@ -22,21 +21,3 @@ func (tag *Tag) BeforeSave(scope *gorm.Scope) error {
 
 	return nil
 }
-
-var TagType = graphql.NewObject(graphql.ObjectConfig{
-	Name: "Tag",
-	Fields: graphql.Fields{
-		"id": &graphql.Field{
-			Type: graphql.NewNonNull(graphql.ID),
-			Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-				if obj, ok := p.Source.(Tag); ok == true {
-					return obj.ID, nil
-				}
-				return nil, nil
-			},
-		},
-		"name": &graphql.Field{
-			Type: graphql.NewNonNull(graphql.String),
-		},
-	},
-})

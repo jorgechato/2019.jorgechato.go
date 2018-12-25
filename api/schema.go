@@ -3,6 +3,7 @@ package api
 import (
 	"github.com/graphql-go/graphql"
 
+	"github.com/jorgechato/api.jorgechato.com/api/affiliates"
 	"github.com/jorgechato/api.jorgechato.com/api/articles"
 	"github.com/jorgechato/api.jorgechato.com/api/misc"
 )
@@ -13,8 +14,12 @@ func buildSchema() (schema graphql.Schema) {
 		Fields: graphql.Fields{
 			"articles": articles.GetArticles(),
 			"article":  articles.GetArticleByID(),
-			"miscs":    misc.GetMisc(),
-			"misc":     misc.GetMiscByID(),
+
+			"affiliates": affiliates.GetAffiliates(),
+			"affiliate":  affiliates.GetAffiliateByID(),
+
+			"miscs": misc.GetMisc(),
+			"misc":  misc.GetMiscByID(),
 		},
 	})
 
@@ -24,8 +29,13 @@ func buildSchema() (schema graphql.Schema) {
 			"createArticle": articles.CreateArticle(),
 			"updateArticle": articles.UpdateArticle(),
 			"deleteArticle": articles.DeleteArticle(),
-			"createMisc":    misc.CreateMisc(),
-			"updateMisc":    misc.UpdateMisc(),
+
+			"createAffiliate": affiliates.CreateAffiliate(),
+			"updateAffiliate": affiliates.UpdateAffiliate(),
+			"deleteAffiliate": affiliates.DeleteAffiliate(),
+
+			"createMisc": misc.CreateMisc(),
+			"updateMisc": misc.UpdateMisc(),
 		},
 	})
 

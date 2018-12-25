@@ -1,31 +1,35 @@
-package articles
+package affiliates
 
 import (
-	"time"
-
 	"github.com/graphql-go/graphql"
 )
 
 var arguments = graphql.FieldConfigArgument{
-	"title": {
+	"name": &graphql.ArgumentConfig{
 		Type: graphql.NewNonNull(graphql.String),
 	},
-	"content": {
+	"url": &graphql.ArgumentConfig{
 		Type: graphql.NewNonNull(graphql.String),
 	},
-	"thumbnail": {
+	"thumbnail": &graphql.ArgumentConfig{
+		Type: graphql.NewNonNull(graphql.String),
+	},
+	"bucket": &graphql.ArgumentConfig{
+		Type: graphql.NewNonNull(graphql.String),
+	},
+	"preview": &graphql.ArgumentConfig{
 		Type: graphql.String,
 	},
-	"public": {
+	"public": &graphql.ArgumentConfig{
 		Type:         graphql.Boolean,
 		DefaultValue: false,
 	},
-	"tags": {
+	"tags": &graphql.ArgumentConfig{
 		Type: graphql.NewList(graphql.String),
 	},
-	"published_at": {
-		Type:         graphql.DateTime,
-		DefaultValue: time.Now(),
+	"score": {
+		Type:         graphql.Int,
+		DefaultValue: 0,
 	},
 	"id": {
 		Type:         graphql.ID,
@@ -33,10 +37,10 @@ var arguments = graphql.FieldConfigArgument{
 	},
 }
 
-// CreateArticle create an article
-func CreateArticle() (field *graphql.Field) {
+// CreateAffiliate create an Affiliate
+func CreateAffiliate() (field *graphql.Field) {
 	field = &graphql.Field{
-		Type: ArticleType,
+		Type: AffiliateType,
 		Args: arguments,
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
 			return create(p)
@@ -46,10 +50,10 @@ func CreateArticle() (field *graphql.Field) {
 	return
 }
 
-// UpdateArticle update an article
-func UpdateArticle() (field *graphql.Field) {
+// UpdateAffiliate update an Affiliate
+func UpdateAffiliate() (field *graphql.Field) {
 	field = &graphql.Field{
-		Type: ArticleType,
+		Type: AffiliateType,
 		Args: arguments,
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
 			return update(p)
@@ -59,10 +63,10 @@ func UpdateArticle() (field *graphql.Field) {
 	return
 }
 
-// DeleteArticle delete an article
-func DeleteArticle() (field *graphql.Field) {
+// DeleteAffiliate delete an Affiliate
+func DeleteAffiliate() (field *graphql.Field) {
 	field = &graphql.Field{
-		Type: ArticleType,
+		Type: AffiliateType,
 		Args: graphql.FieldConfigArgument{
 			"id": &graphql.ArgumentConfig{
 				Type: graphql.NewNonNull(graphql.ID),

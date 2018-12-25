@@ -1,6 +1,7 @@
 package articles
 
 import (
+	"strings"
 	"time"
 
 	"github.com/graphql-go/graphql"
@@ -57,7 +58,7 @@ func create(p graphql.ResolveParams) (interface{}, error) {
 
 	if objs, ok := p.Args["tags"].([]interface{}); ok == true {
 		for _, obj := range objs {
-			tag := tags.GetTagByName(obj.(string))
+			tag := tags.GetTagByName(strings.ToLower(obj.(string)))
 			article.Tags = append(article.Tags, &tag)
 		}
 	}
@@ -71,6 +72,10 @@ func update(p graphql.ResolveParams) (interface{}, error) {
 	var article Article
 
 	article.ID = p.Args["id"].(string)
+	if article.ID == "" {
+		return nil, nil
+	}
+
 	article.Title = p.Args["title"].(string)
 	article.Content = p.Args["content"].(string)
 	article.Public = p.Args["public"].(bool)
@@ -89,7 +94,7 @@ func update(p graphql.ResolveParams) (interface{}, error) {
 
 	if objs, ok := p.Args["tags"].([]interface{}); ok == true {
 		for _, obj := range objs {
-			tag := tags.GetTagByName(obj.(string))
+			tag := tags.GetTagByName(strings.ToLower(obj.(string)))
 			article.Tags = append(article.Tags, &tag)
 		}
 	}
