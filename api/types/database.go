@@ -12,14 +12,12 @@ import (
 var Session *gorm.DB
 
 func init() {
-	if Session, err := gorm.Open("postgres", DB); err == nil {
-		Session.DB().SetConnMaxLifetime(time.Minute * 5)
-		Session.DB().SetMaxIdleConns(5)
-		Session.DB().SetMaxOpenConns(5)
-	}
-}
+	Session, _ = gorm.Open("postgres", DB)
 
-func main() {
+	Session.DB().SetConnMaxLifetime(time.Minute * 5)
+	Session.DB().SetMaxIdleConns(5)
+	Session.DB().SetMaxOpenConns(5)
+
 	gorm.DefaultTableNameHandler = func(db *gorm.DB, defaultTableName string) string {
 		return "go_" + defaultTableName
 	}

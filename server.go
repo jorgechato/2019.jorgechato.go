@@ -42,6 +42,7 @@ func init() {
 	db.AutoMigrate(
 		&Article{},
 		&Tag{},
+		&Affiliate{},
 		&Misc{},
 	)
 }

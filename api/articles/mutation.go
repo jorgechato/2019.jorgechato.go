@@ -4,8 +4,6 @@ import (
 	"time"
 
 	"github.com/graphql-go/graphql"
-
-	. "github.com/jorgechato/api.jorgechato.com/api/types"
 )
 
 // CreateArticle create an article
@@ -26,34 +24,72 @@ func CreateArticle() (field *graphql.Field) {
 				Type:         graphql.Boolean,
 				DefaultValue: false,
 			},
+			"tags": &graphql.ArgumentConfig{
+				Type: graphql.NewList(graphql.String),
+			},
 			"published_at": &graphql.ArgumentConfig{
 				Type:         graphql.DateTime,
 				DefaultValue: time.Now(),
 			},
 		},
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+			return create(p)
+		},
+	}
 
-			var article Article
+	return
+}
 
-			article.Title = p.Args["title"].(string)
-			article.Content = p.Args["content"].(string)
-			article.Public = p.Args["public"].(bool)
+// UpdateArticle update an article
+func UpdateArticle() (field *graphql.Field) {
+	field = &graphql.Field{
+		Type: ArticleType,
+		Args: graphql.FieldConfigArgument{
+			"id": &graphql.ArgumentConfig{
+				Type: graphql.NewNonNull(graphql.ID),
+			},
+			"title": &graphql.ArgumentConfig{
+				Type:         graphql.String,
+				DefaultValue: "",
+			},
+			"content": &graphql.ArgumentConfig{
+				Type:         graphql.String,
+				DefaultValue: "",
+			},
+			"tags": &graphql.ArgumentConfig{
+				Type: graphql.NewList(graphql.String),
+			},
+			"thumbnail": &graphql.ArgumentConfig{
+				Type: graphql.String,
+			},
+			"public": &graphql.ArgumentConfig{
+				Type:         graphql.Boolean,
+				DefaultValue: false,
+			},
+			"published_at": &graphql.ArgumentConfig{
+				Type:         graphql.DateTime,
+				DefaultValue: time.Now(),
+			},
+		},
+		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+			return update(p)
+		},
+	}
 
-			switch arg := p.Args["published_at"].(type) {
-			case string:
-				time, _ := time.Parse(time.RFC3339, arg)
-				article.PublishedAt = time
-			case time.Time:
-				article.PublishedAt = arg
-			}
+	return
+}
 
-			if obj, ok := p.Args["thumbnail"].(string); ok == true {
-				article.Thumbmail = obj
-			}
-
-			createArticle(&article)
-
-			return article, nil
+// DeleteArticle delete an article
+func DeleteArticle() (field *graphql.Field) {
+	field = &graphql.Field{
+		Type: ArticleType,
+		Args: graphql.FieldConfigArgument{
+			"id": &graphql.ArgumentConfig{
+				Type: graphql.NewNonNull(graphql.ID),
+			},
+		},
+		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+			return delete(p)
 		},
 	}
 

@@ -15,6 +15,14 @@ func getMiscList(first, offset int) []Misc {
 	return miscList
 }
 
+func getMiscByID(id string) Misc {
+	var misc Misc
+
+	Session.First(&misc, "id = ?", id)
+
+	return misc
+}
+
 func createMisc(misc *Misc) {
 	Session.Create(misc)
 }
@@ -24,12 +32,4 @@ func updateMisc(misc *Misc) {
 		Omit("created_at").
 		Omit("id").
 		Update(*misc)
-}
-
-func getMiscByID(id string) Misc {
-	var misc Misc
-
-	Session.First(&misc, "id = ?", id)
-
-	return misc
 }

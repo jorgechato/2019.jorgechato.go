@@ -2,8 +2,6 @@ package articles
 
 import (
 	"github.com/graphql-go/graphql"
-
-	. "github.com/jorgechato/api.jorgechato.com/api/types"
 )
 
 // GetArticles get all articles
@@ -21,13 +19,7 @@ func GetArticles() (field *graphql.Field) {
 			},
 		},
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-
-			articles := getArticles(
-				p.Args["first"].(int),
-				p.Args["offset"].(int),
-			)
-
-			return articles, nil
+			return getList(p)
 		},
 	}
 
@@ -44,10 +36,7 @@ func GetArticleByID() (field *graphql.Field) {
 			},
 		},
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-
-			article := getArticleByID(p.Args["id"].(string))
-
-			return article, nil
+			return get(p)
 		},
 	}
 
