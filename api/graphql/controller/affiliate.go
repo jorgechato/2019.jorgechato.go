@@ -28,12 +28,18 @@ func GetAffiliate(p graphql.ResolveParams) (interface{}, error) {
 }
 
 func GetAffiliates(p graphql.ResolveParams) (interface{}, error) {
-	articles := service.GetAffiliates(
+	if obj, ok := p.Source.(Bucket); ok == true {
+		return service.GetAffiliatesByBucket(
+			obj,
+			p.Args["first"].(int),
+			p.Args["offset"].(int),
+		), nil
+	}
+
+	return service.GetAffiliates(
 		p.Args["first"].(int),
 		p.Args["offset"].(int),
-	)
-
-	return articles, nil
+	), nil
 }
 
 func CreateAffiliate(p graphql.ResolveParams) (interface{}, error) {

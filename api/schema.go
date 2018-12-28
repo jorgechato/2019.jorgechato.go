@@ -36,6 +36,10 @@ func buildSchema() (schema graphql.Schema) {
 			"updateAffiliate": mutation.UpdateAffiliate(),
 			"deleteAffiliate": mutation.DeleteAffiliate(),
 
+			"deleteBucket": mutation.DeleteBucket(),
+			"cleanBucket":  mutation.CleanBucket(),
+			"CreateBucket": mutation.CreateBucket(),
+
 			"createMisc": mutation.CreateMisc(),
 			"updateMisc": mutation.UpdateMisc(),
 		},

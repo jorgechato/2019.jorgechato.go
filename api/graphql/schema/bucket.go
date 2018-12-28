@@ -3,6 +3,7 @@ package schema
 import (
 	"github.com/graphql-go/graphql"
 
+	"github.com/jorgechato/api.jorgechato.com/api/graphql/controller"
 	"github.com/jorgechato/api.jorgechato.com/api/service"
 	. "github.com/jorgechato/api.jorgechato.com/api/types"
 )
@@ -30,13 +31,21 @@ func init() {
 		"affiliates",
 		&graphql.Field{
 			Type: graphql.NewList(AffiliateType),
+			Args: graphql.FieldConfigArgument{
+				"first": &graphql.ArgumentConfig{
+					Type:         graphql.Int,
+					DefaultValue: -1,
+				},
+				"offset": &graphql.ArgumentConfig{
+					Type:         graphql.Int,
+					DefaultValue: -1,
+				},
+			},
 			Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-				if obj, ok := p.Source.(Bucket); ok == true {
-					return service.GetAffiliatesByBucket(obj), nil
-				}
-				return nil, nil
+				return controller.GetAffiliates(p)
 			},
 		})
+
 	BucketType.AddFieldConfig(
 		"bestSeller",
 		&graphql.Field{

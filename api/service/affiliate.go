@@ -41,10 +41,12 @@ func UpdateAffiliate(affiliate *Affiliate) {
 		Update(*affiliate)
 }
 
-func GetAffiliatesByBucket(bucket Bucket) []*Affiliate {
+func GetAffiliatesByBucket(bucket Bucket, first, offset int) []*Affiliate {
 	var affiliates []*Affiliate
 
 	Session.
+		Offset(offset).
+		Limit(first).
 		Model(&bucket).
 		Related(&affiliates, "Affiliates")
 

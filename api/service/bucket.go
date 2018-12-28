@@ -4,6 +4,11 @@ import (
 	. "github.com/jorgechato/api.jorgechato.com/api/types"
 )
 
+func DeleteBucket(bucket *Bucket) {
+	Session.
+		Delete(bucket)
+}
+
 func GetBucketByID(id string) Bucket {
 	var bucket Bucket
 
@@ -22,6 +27,10 @@ func GetBucketByName(name string) Bucket {
 	return bucket
 }
 
+func CreateBucket(bucket *Bucket) {
+	Session.Create(bucket)
+}
+
 func UpdateBucket(bucket *Bucket) {
 	Session.
 		Model(bucket).
@@ -30,11 +39,13 @@ func UpdateBucket(bucket *Bucket) {
 		Update(*bucket)
 }
 
-func GetBuckets() []Bucket {
+func GetBuckets(first, offset int) []Bucket {
 	var buckets []Bucket
 
 	Session.
 		Order("created_at desc").
+		Offset(offset).
+		Limit(first).
 		Find(&buckets)
 
 	return buckets
