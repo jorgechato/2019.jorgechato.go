@@ -19,7 +19,6 @@ schema:
     - go
     - lock
     - toml
-    - graphql
     paths:
     - /
     ignored_paths:

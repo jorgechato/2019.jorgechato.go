@@ -25,7 +25,6 @@ var (
 	readHeaderTimeout = time.Second * 1
 	maxHeaderBytes    = http.DefaultMaxHeaderBytes
 	address           = fmt.Sprintf("%v:%v", HOST, PORT)
-	hiddenAddress     = fmt.Sprintf("%v:%v", HOST, HIDDENPORT)
 	info              = map[string]string{
 		"Build User":   "@" + AUTHOR,
 		"Version":      "v" + VERSION,
@@ -34,31 +33,6 @@ var (
 	}
 	start = time.Now()
 )
-
-func init() {
-	db, _ := gorm.Open("postgres", DB)
-	defer db.Close()
-
-	// TODO: remove drop
-	// db.DropTableIfExists(
-	// &Article{},
-	// &Bucket{},
-	// &Tag{},
-	// &Affiliate{},
-	// &Misc{},
-	// )
-
-	db.AutoMigrate(
-		&Article{},
-		&Bucket{},
-		&Tag{},
-		&Affiliate{},
-		&Misc{},
-		&User{},
-		&Todo{},
-		&Location{},
-	)
-}
 
 func main() {
 	b, _ := json.MarshalIndent(info, "", "  ")
@@ -73,26 +47,9 @@ func main() {
 		MaxHeaderBytes:    maxHeaderBytes,
 	}
 
-	hiddenServer := &http.Server{
-		Addr:              hiddenAddress,
-		Handler:           metrics.Build(),
-		ReadHeaderTimeout: readHeaderTimeout,
-		WriteTimeout:      writeTimeout,
-		IdleTimeout:       idleTimeout,
-		MaxHeaderBytes:    maxHeaderBytes,
-	}
-
 	go func() {
 		log.Fatal(server.ListenAndServe())
 	}()
-
-	go func() {
-		log.Fatal(hiddenServer.ListenAndServe())
-	}()
-
-	metrics.RampUpTime.Set(
-		float64(time.Since(start).Nanoseconds()),
-	)
 
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, os.Interrupt)
@@ -100,9 +57,8 @@ func main() {
 	// Block until we receive our signal.
 	<-c
 
-	ctx, cancel := context.WithTimeout(context.Background(), 2)
+	ctx, cancel := context.WithTimeout(context.Background(), 1)
 	defer cancel()
 	server.Shutdown(ctx)
-	hiddenServer.Shutdown(ctx)
 	os.Exit(0)
 }
