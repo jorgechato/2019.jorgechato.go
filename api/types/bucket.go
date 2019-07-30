@@ -10,6 +10,8 @@ type Bucket struct {
 	Model
 	Name        string       `gorm:"primary_key" json:"name"`
 	Description string       `json:"description"`
+	Thumbmail   string       `json:"thumbnail"`
+	Preview     string       `json:"preview"`
 	Affiliates  []*Affiliate `gorm:"foreignkey:Bucket" json:"affiliates"`
 }
 

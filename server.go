@@ -54,6 +54,9 @@ func init() {
 		&Tag{},
 		&Affiliate{},
 		&Misc{},
+		&User{},
+		&Todo{},
+		&Location{},
 	)
 }
 

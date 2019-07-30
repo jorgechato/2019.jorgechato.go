@@ -23,6 +23,12 @@ var BucketType = graphql.NewObject(graphql.ObjectConfig{
 		"name": &graphql.Field{
 			Type: graphql.NewNonNull(graphql.String),
 		},
+		"thumbnail": &graphql.Field{
+			Type: graphql.String,
+		},
+		"preview": &graphql.Field{
+			Type: graphql.String,
+		},
 	},
 })
 

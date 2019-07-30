@@ -51,5 +51,14 @@ func CleanBucket(p graphql.ResolveParams) (interface{}, error) {
 }
 
 func CreateBucket(p graphql.ResolveParams) (interface{}, error) {
-	// TODO
+	var bucket Bucket
+
+	bucket.Name = p.Args["name"].(string)
+	bucket.Description = p.Args["description"].(string)
+	bucket.Thumbmail = p.Args["thumbnail"].(string)
+	bucket.Preview = p.Args["preview"].(string)
+
+	service.CreateBucket(&bucket)
+
+	return bucket, nil
 }

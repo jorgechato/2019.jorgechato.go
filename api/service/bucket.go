@@ -22,7 +22,7 @@ func GetBucketByName(name string) Bucket {
 
 	Session.
 		Where(Bucket{Name: name}).
-		FirstOrCreate(&bucket)
+		First(&bucket)
 
 	return bucket
 }
