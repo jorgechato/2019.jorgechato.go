@@ -1,15 +1,13 @@
 package api
 
 import (
-	"net/http"
+	"github.com/gin-gonic/gin"
 )
 
-// Build the needed endpoints
-func Build() (mux *http.ServeMux) {
-	// Register handlers to routes.
-	mux = http.NewServeMux()
-	mux.Handle("/", graphqlHandler())
-	mux.Handle("/health", healthHandler())
+func Build() (router *gin.Engine) {
+	router = gin.Default()
+
+	router.GET("/", pong)
 
 	return
 }
