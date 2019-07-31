@@ -16,7 +16,6 @@ before_install:
   - docker pull "$IMAGE_NAME" || true
 
 install:
-  - make dep
   - make vendor
 
 script:
