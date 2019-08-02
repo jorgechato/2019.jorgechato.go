@@ -3,9 +3,8 @@
 [![Docker](https://img.shields.io/badge/docker-image-blue.svg)](https://hub.docker.com/r/jorgechato/api.jorgechato.com/)
 [![Go Report Card](https://goreportcard.com/badge/github.com/jorgechato/api.jorgechato.com)](https://goreportcard.com/report/github.com/jorgechato/api.jorgechato.com)
 [![Godoc](https://img.shields.io/badge/go-documentation-blue.svg)](https://godoc.org/github.com/jorgechato/api.jorgechato.com)
-[![jorgechato.com](https://img.shields.io/badge/web-jorgechato.com-orange.svg)](https://jorgechato.com)
+[![whereisjorge.today](https://img.shields.io/badge/web-whereisjorge.today-orange.svg)](https://whereisjorge.today)
 
 ## Must have
 
-- [Go>=9](https://golang.org/)
-- [dep](https://github.com/golang/dep)
+- [Go>=11.x](https://golang.org/)
