@@ -12,9 +12,17 @@ var (
 	APIBASE = "/v1"
 )
 
+var (
+	// KEY Env variables
+	GITHUB_TOKEN = "GITHUB_TOKEN"
+)
+
 const (
-	CACHE_EXPIRED      = 60
+	CACHE_EXPIRED      = 60 // minutes
 	CACHE_KEY_LOCATION = "location"
 
 	LOCATION_API = "https://www.polarsteps.com/api/users/byusername/JorgeChato"
+
+	GITHUB_USER  = "jorgechato"
+	GITHUB_TOPIC = "public"
 )

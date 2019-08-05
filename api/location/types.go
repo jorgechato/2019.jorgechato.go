@@ -5,31 +5,33 @@ import (
 	"time"
 )
 
-type Where struct {
-	Name     string     `json:"name" first_name`
-	Stats    Stats      `json:"stats"`
-	Location Location   `json:"location"`
-	Next     []Location `json:"next_locations,omitempty"`
-}
+type (
+	Where struct {
+		Name     string     `json:"name"`
+		Stats    Stats      `json:"stats"`
+		Location Location   `json:"location"`
+		Next     []Location `json:"next_locations,omitempty"`
+	}
 
-type Location struct {
-	City        string  `json:"city,omitempty"`
-	Country     string  `json:"country"`
-	CountryCode string  `json:"country_code,omitempty"`
-	Lat         float64 `json:"lat,omitempty"`
-	Lon         float64 `json:"lon,omitempty"`
-	Url         string  `json:"url,omitempty"`
-	Thumbnail   string  `json:"thumbnail,omitempty"`
-	Next        string  `json:"next,omitempty"`
-	In          int64   `json:"check_in,omitempty"`
-	Out         int64   `json:"check_out,omitempty"`
-	TimezoneID  string  `json:"timezone_id"`
-}
+	Location struct {
+		City        string  `json:"city,omitempty"`
+		Country     string  `json:"country"`
+		CountryCode string  `json:"country_code,omitempty"`
+		Lat         float64 `json:"lat,omitempty"`
+		Lon         float64 `json:"lon,omitempty"`
+		Url         string  `json:"url,omitempty"`
+		Thumbnail   string  `json:"thumbnail,omitempty"`
+		Next        string  `json:"next,omitempty"`
+		In          int64   `json:"check_in,omitempty"`
+		Out         int64   `json:"check_out,omitempty"`
+		TimezoneID  string  `json:"timezone_id"`
+	}
 
-type Stats struct {
-	Continents []string `json:"continents"`
-	Countries  []string `json:"countries"`
-}
+	Stats struct {
+		Continents []string `json:"continents"`
+		Countries  []string `json:"countries"`
+	}
+)
 
 func (w *Where) build(p Polarsteps) {
 	wg := sync.WaitGroup{}
