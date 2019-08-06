@@ -19,6 +19,7 @@ var (
 
 const (
 	CACHE_EXPIRED      = 60 // minutes
+	CACHE_CLEAN        = 7  // seconds
 	CACHE_KEY_LOCATION = "location"
 
 	LOCATION_API = "https://www.polarsteps.com/api/users/byusername/JorgeChato"
