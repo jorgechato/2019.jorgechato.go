@@ -2,7 +2,9 @@ package location
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
+	"os"
 
 	"github.com/gin-gonic/gin"
 
@@ -15,7 +17,12 @@ func Today(c *gin.Context) {
 	if entry, err := Cache.Get(CACHE_KEY_LOCATION); err == nil {
 		json.Unmarshal(entry, &w)
 	} else {
-		res, _ := http.Get(LOCATION_API)
+		res, _ := http.Get(
+			fmt.Sprintf(
+				LOCATION_API,
+				os.Getenv(LOCATION_USER),
+			),
+		)
 
 		defer res.Body.Close()
 

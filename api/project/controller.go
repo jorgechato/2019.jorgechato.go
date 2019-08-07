@@ -33,7 +33,11 @@ func Repos(c *gin.Context) {
 
 	res, _, _ := client.Search.Repositories(
 		ctx,
-		fmt.Sprintf("topic:%v user:%v", GITHUB_TOPIC, GITHUB_USER),
+		fmt.Sprintf(
+			"topic:%v user:%v",
+			os.Getenv(GITHUB_TOPIC),
+			os.Getenv(GITHUB_USER),
+		),
 		&github.SearchOptions{
 			Sort: "updated",
 		},

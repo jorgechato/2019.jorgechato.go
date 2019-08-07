@@ -1,3 +1,6 @@
+include .env
+export
+
 MAIN_VERSION:=$(shell git describe --always --abbrev=7 --tags || echo "0.1")
 AUTHOR:=$(shell git --no-pager show -s --format='%an' ${MAIN_VERSION})
 PLATFORM:=$(shell go env GOOS)
