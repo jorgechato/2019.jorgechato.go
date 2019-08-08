@@ -31,5 +31,5 @@ const (
 	CACHE_KEY_LOCATION = "location"
 
 	LOCATION_API  = "https://www.polarsteps.com/api/users/byusername/%v"
-	MAILCHIMP_API = "https://%v.api.mailchimp.com/3.0/lists/%v"
+	MAILCHIMP_API = "https://%v.api.mailchimp.com/3.0/lists/%v/members/%v"
 )
