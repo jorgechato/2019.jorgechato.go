@@ -22,7 +22,7 @@ func List(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	s.Status = "subscribed"
+	s.Status = "pending"
 
 	data := new(bytes.Buffer)
 	json.NewEncoder(data).Encode(s)

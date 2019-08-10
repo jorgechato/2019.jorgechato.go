@@ -17,10 +17,13 @@ schema:
   watcher:
     extensions:
     - go
-    - lock
-    - toml
+    - mod
     paths:
-    - /
+    - api
+    - utils
+    - go.mod
+    - server.go
+    - github
     ignored_paths:
     - .git
     - .realize

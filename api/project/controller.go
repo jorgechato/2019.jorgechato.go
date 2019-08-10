@@ -1,7 +1,6 @@
 package project
 
 import (
-	"context"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -9,30 +8,16 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/google/go-github/v27/github"
-	"golang.org/x/oauth2"
 
+	g "jorgechato.com/github"
 	. "jorgechato.com/utils"
 )
-
-var client *github.Client
-var ctx context.Context
-
-func init() {
-	ctx = context.Background()
-
-	ts := oauth2.StaticTokenSource(
-		&oauth2.Token{AccessToken: os.Getenv(GITHUB_TOKEN)},
-	)
-	httpClient := oauth2.NewClient(ctx, ts)
-
-	client = github.NewClient(httpClient)
-}
 
 func Repos(c *gin.Context) {
 	var repos Repositories
 
-	res, _, _ := client.Search.Repositories(
-		ctx,
+	res, _, _ := g.Client.Search.Repositories(
+		g.Ctx,
 		fmt.Sprintf(
 			"topic:%v user:%v",
 			os.Getenv(GITHUB_TOPIC),

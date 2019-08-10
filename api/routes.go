@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 
 	"jorgechato.com/api/location"
+	"jorgechato.com/api/misc"
 	"jorgechato.com/api/project"
 	"jorgechato.com/api/subscription"
 	. "jorgechato.com/utils"
@@ -14,8 +15,9 @@ func Build() (router *gin.Engine) {
 
 	v := router.Group(APIBASE)
 	{
-		v.GET("/where", location.Today)
+		v.GET("/location", location.Today)
 		v.GET("/projects", project.Repos)
+		v.GET("/lists", misc.Lists)
 		v.POST("/subscribe", subscription.List)
 	}
 
