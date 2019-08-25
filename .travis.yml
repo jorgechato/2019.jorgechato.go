@@ -1,39 +1,32 @@
 dist: trusty
-sudo: required
+sudo: true
 language: go
 go:
-  - 1.12.x
-sudo: true
+- 1.12.x
 services:
-  - docker
+- docker
 env:
   global:
-    - IMAGE_NAME=jorgechato/api.jorgechato.com
-
+  - IMAGE_NAME=api-jorgechato-com
+  - secure: F4HIdt+tzfsycFoI95R5ZY7k/dTtED0+AfScMe32ib40FG2YY/HngNkwA3R8XRydIgQ8pu5yk0PXYze0Xp1CVWlVK2+01dEy8SPNByemNalOp0tSAbmSdXDT4R9Uk9fERR/Dx4qeBPFj1OheaUukdJHejthMa+2Obms5t/WKfn5q+nSOUxhZJlPjdJtNNJ/pC61gC/54wR0W9cnwoXEZrUJpe+SKdcC70BlcFMOIeW5n3p3qCNLh1DuTTx1O8LJXOleqc7zfqKRtzD24GgpVhhYKLNTY23M0z01OXatClrS+IdEyNujsmy+Z35mW62GXlEXdh7HbJfdSXlfbnwZ1/Py9JxKjp4ofdzCpaZwxcwNgVS25YtQspmXoOyRiAMqurgq0PHdG1KSlSsT9o8jxyfqcgJTVi/1+/FpU+ph3cyeLKi5Ph9c80wAv1wguzB/Ikb43zc+HW4y19vCUwjL6mnDabryJ0DFr/plG7hmHrwFyxjxEwL3fr6W0/+W8g9npH92moo7dby7MlnqDWzOOF5mJGUqby/UOrkEYTQaYgcnIhuJJXeSZxrlF1+ex4hlm1baU+bswraeVRJ5R5AAHcovzHI1DNGz1URvKvO1qSDQLOGqgyj0XQ6B/w2J8oYwRFdsiOYnXdUWooGeSIQg1+Kz1cwTR4p4zPLsYwUgs530=
+  - secure: RptrbhLSrdMgydmpRbxkAsGFroe3ZMZ5MwKh48HyxnOjakP6t1cveVEjnkl8FHMlkqnY2v/Ycy9Na5t4vqWDjL/g+LATfpf9bOiNgP6XvZvEupheWIBUANtQygzDQoVDOI8ZEqjkg8yeyYeh9QA03UgRdaTVGt3Q3RV7YiS8ZCVOpQwlP5MhUwt43JMGfhjE5bILqlsBCHdTUQdCbule3cBHyoKs97yhj/GSnFLsWD2MtGVuishz0KhpUe8v1wtATDm779jq2ZgCIKd7VzurqIwyRpyqnRrDO00Kuj034CzfXl8Em0odrAknv4GNE1+4bn2s7o/UnYTDP3ughnks3XTybw/IJYKY7VtSIYxhjD/fg9kVeHD4JlyTmsn5aobsroas5J9nTx5EnFDHcCCIwt4ifhd2Lq1kTFABxEX/alWu7tglo3YaXKz8OQLT4z4zWaFOWu7A4qd0sme7DkHL4lroWgJLDT4aGKVbxFvCXxkaQe1j5k2VzPhPooRAL9RXJi2LBGGM9RlE3MEojQC95FrUZgbfl1cAE38q9eLzJ6DvUN5b+SnklpvfH5NHuz9iDSNH672E/m+mnxtqrbWOiZDB6yG/vLVUhiu8zSxDaTf0BIB2E9D4tp4YFoqOqQHZSYdI8qRYER4+uxql+/uRwQoU7rMpPcHOF/zSybwtQNY=
+  - secure: vnWfHkGHRmKNNoSyDc9yEv/1jfOA24mVonnySm5y+gn90zjH3/dA5YKPP5BUZd1fZbwQ3yqSdkas2TNqS4TFb0IYPG/RiQOB1sk7FCqw7R2NynsAXPHg9NHYrVP+ANuRnjTKiuhPxX8n/c+nIRvPXXyH742uYVyI56torXwQrzKkv3PzCiIMMvBV7oHTh8R+MPeU9z61ueXFFeQ0nS2sPwPO/W9Y62A21k4MrbG8qG+rJnrxNc96DJBB6OG5s5eLKolEEPtFOQMF6DhdGEpac8BPMVfnquxMiI4vVVxZFAT93UoBOQdTIjb9mlpN/xxEhwFXoeSm4bXhSKm2Ta34gLbT/ICi4GnxCnVZ76Bf/tyluQkDAsg2pXlerGKRBCcOrjn72SuFt4gmbZjo3KThGtxEwhhJLLIeW7rpAWHQZojzs2S5SGNhxcThRLuhL/NX20pPfrjqIcQNKkNLKEAy6hYBr9NrCCNfDD/K/ngj+ip2/zb5OMVEwAXc1pY8hDWPhpbVoIr7RgsH35ewtZYWxXhjGWJ4hvu7mr4g667fdR7XkUDhDQxaPE34LjItQjOSbBPnNzSfSxi48F408xJ3w/o2PC/vYaTBxclWvr2qi/eIMqc0XKjauti7USEzMzSOdRYJBBxFpIKuqpv4Oxx2c7tWS47MJKvCj/g7rl1W1BQ=
+  - secure: usPUSv2opC8ivz5tL7z7RUXfesEiMbKQ3SCj94d6RxEYcCiLec94wjoxLJh051uoBrzKJbQxUwY2QjiQZRoaFXiP04OA4rkScR90hlYWZTHF4eKKo/L8bhKQ0Cs8FVlvWzNJbCqafdGmEOOPHTfxBagBRlHW65MARZ80jdvSHzTpa9q5W2YJIv03dRp2SPx/YMWTWsSEP06rRdFdCHn0l4qBSyequzTNkQBUMS+k2kgLD9AjV/iA96ZbgL/7GmZN0JU6nBuDcYSrv1qb7fEcc73yfLwNMK5KibSBf2ZKZs/l8dU2z95Mh50/OLMU3cK6a3M2/0Acd0L377BasTqfHYfqctVZW0Q0YXudofRLePnGHVAUsRRZKeaZOr6M++dj6Incf3ZNeeQTYYjMHBCoM3Fr5HvCxyyQ7qUkFODU/iGjsQ6dstJM4mqIqqfqt4d2s1h7GLds+EAN+iLmEdMLVTv1Db28fYJAuWXhoXK1hxPf7FK/Wvap680aNMogBZV/0T+03dkLdv4DBCEL7sQgNDgkXVzSl3G8+sTXu67yhyAOqIFC3ccaKlxjMuIZfVfVP39quYWyO/OlYNyfz0WJeqaX3VWul9BK3HqXasok4dnV0gGv8PJApsctmdcXdyrQbU/RHy5fjN8Ka5FCiBv4zhn7BK3a52Z+q9hwl4QV9ZA=
 
 before_install:
-  - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
-  - docker pull "$IMAGE_NAME" || true
-
+- pip install --user awscli
+- export PATH=$PATH:$HOME/.local/bin
+- eval $(aws ecr get-login --region eu-west-1 --no-include-email)
+- docker pull $IMAGE_NAME || true
 install:
-  - go mod download
-  - go mod verify
+- go mod download
+- go mod verify
 
+before_script:
+- go test -race -cover -v -coverprofile=coverage.out ./... > test.output || true
 script:
-  - go test -race -cover -v -coverprofile=coverage.out ./... > test.output || true
-
+- docker build --pull --cache-from $IMAGE_NAME --tag $IMAGE_NAME .
+- docker tag $IMAGE_NAME $REPO_HOST/$IMAGE_NAME:latest
+- docker push $REPO_HOST/$IMAGE_NAME:latest
 after_success:
-  - docker build --pull --cache-from "$IMAGE_NAME" --tag "$IMAGE_NAME" .
-
-before_deploy:
-  - docker tag "$IMAGE_NAME" "${IMAGE_NAME}:latest"
-
-deploy:
-  provider: script
-  script: docker push "${IMAGE_NAME}:latest"
-  target-branch: master
-  on:
-    branch: master
-
-after_script:
-  - docker images
+- docker images
