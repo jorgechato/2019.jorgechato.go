@@ -1,6 +1,7 @@
 package api
 
 import (
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 
 	"jorgechato.com/api/article"
@@ -14,6 +15,13 @@ import (
 
 func Build() (router *gin.Engine) {
 	router = gin.Default()
+
+	config := cors.DefaultConfig()
+	config.AllowOrigins = []string{
+		"https://jorgechato.com",
+		"https://whereisjorge.today",
+	}
+	router.Use(cors.New(config))
 
 	v := router.Group(APIBASE)
 	{
