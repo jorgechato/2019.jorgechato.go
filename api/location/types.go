@@ -90,6 +90,7 @@ func (w *Where) build(p Polarsteps) {
 				Lat:         step.Location.Lat,
 				Lon:         step.Location.Lon,
 				In:          int64(step.StartDate),
+				Out:         int64(location.EndDate),
 				CountryCode: step.Location.CountryCode,
 				TimezoneID:  location.TimezoneID,
 			}
