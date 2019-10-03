@@ -10,6 +10,7 @@ type (
 		Name     string     `json:"name"`
 		Stats    Stats      `json:"stats"`
 		Location Location   `json:"location"`
+		Origin   Location   `json:"origin"`
 		Next     []Location `json:"next_locations,omitempty"`
 	}
 
@@ -49,6 +50,11 @@ func (w *Where) build(p Polarsteps) {
 		Country: p.LivingLocation.Detail,
 		Lat:     p.LivingLocation.Lat,
 		Lon:     p.LivingLocation.Lon,
+	}
+
+	w.Origin = Location{
+		Lat: p.LivingLocation.Lat,
+		Lon: p.LivingLocation.Lon,
 	}
 
 	for _, location := range p.Alltrips {
