@@ -1,14 +1,13 @@
 module github.com/jorgechato/api.jorgechato.com
 
-go 1.12
-
-require (
-	github.com/allegro/bigcache v1.2.1
-	github.com/gin-contrib/cors v1.3.0
-	github.com/gin-gonic/gin v1.4.0
-	github.com/google/go-github/v27 v27.0.4
-	golang.org/x/oauth2 v0.0.0-20190604053449-0f29369cfe45
-	jorgechato.com v0.0.0-00010101000000-000000000000
-)
+go 1.14
 
 replace jorgechato.com => ./
+
+require (
+	github.com/gin-contrib/cors v1.3.1
+	github.com/gin-gonic/gin v1.6.3
+	github.com/json-iterator/go v1.1.9
+	github.com/pkg/errors v0.9.1
+	jorgechato.com v0.0.0-00010101000000-000000000000
+)
