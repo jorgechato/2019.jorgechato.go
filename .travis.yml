@@ -28,8 +28,8 @@ after_success:
 deploy:
   provider: script
   script: bash lazy.sh
-  target-branch: master
+  target-branch: v1
   on:
-    branch: master
+    branch: v1
 after_script:
 - docker images
