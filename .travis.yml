@@ -2,7 +2,7 @@ dist: trusty
 sudo: true
 language: go
 go:
-- 1.12.x
+- 1.14.x
 services:
 - docker
 env:
@@ -23,11 +23,11 @@ install:
 script:
 - go test -race -cover -v -coverprofile=coverage.out ./... > test.output || true
 after_success:
-- docker build --pull --cache-from ${IMAGE_NAME} --tag ${IMAGE_NAME} .
+- docker build --pull --cache-from ${IMAGE_NAME} --tag ${IMAGE_NAME} -f build/Dockerfile .
 
 deploy:
   provider: script
-  script: bash lazy.sh
+  script: bash scripts/lazy.sh
   target-branch: master
   on:
     branch: master
