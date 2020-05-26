@@ -7,4 +7,43 @@
 
 ## Must have
 
-- [Go>=11.x](https://golang.org/)
+- [Go>=14.x](https://golang.org/)
+
+## Description
+
+I've been researching the proper way to structure code for the last 4 years.
+Currently I'm into a clean code architecture, more specific testing the
+**Hexagonal Architecture**.
+
+I run into [this 101 article](https://herbertograca.com/2017/11/16/explicit-architecture-01-ddd-hexagonal-onion-clean-cqrs-how-i-put-it-all-together/) which describe perfectly the DDD, clean code and
+hexagonal architecture.
+
+## Structure
+
+Following the basic *go* structure, **cmd** hosted the entry points for each port.
+In the **pkg** folder you can find the source code of the project, where the
+magic happen.
+
+The different components are split into packages following the Who + What
+principle. In the next example we only have one who (location) and 4 what
+(application, domain, infrastructure, repository) as described in the hexagonal
+architecture.
+
+```bash
+.
+├── build # core build misc (dockerfile, k8s.yml...)
+├── cmd # entry point
+│   ├── http
+│   └── lambda
+├── pkg # source code
+│   └── location # who
+│       ├── application # use cases
+│       │   └── json
+│       ├── domain # business logic
+│       ├── infrastructure # ports
+│       │   ├── api
+│       │   ├── lambda
+│       │   └── polarsteps
+│       └── repository # adapters
+└── scripts # build scripts (.sh...)
+```
