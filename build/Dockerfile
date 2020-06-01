@@ -1,4 +1,4 @@
-FROM golang:1.12-alpine as builder
+FROM golang:1.14-alpine as builder
 
 RUN apk add -U --no-cache git ca-certificates tzdata
 
@@ -8,7 +8,7 @@ WORKDIR /app
 RUN go mod download
 RUN go mod verify
 
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -installsuffix cgo -ldflags="${LDFLAGS}" -o server server.go
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -installsuffix cgo -ldflags="${LDFLAGS}" -o server cmd/http/main.go
 
 
 FROM scratch as final

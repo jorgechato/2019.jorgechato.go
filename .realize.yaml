@@ -4,7 +4,7 @@ settings:
     interval: 100ms
 schema:
 - name: api.jorgechato.com
-  path: .
+  path: ./cmd/http
   commands:
     clean:
       status: true
@@ -19,13 +19,11 @@ schema:
     - go
     - mod
     paths:
-    - api
-    - utils
-    - go.mod
-    - server.go
-    - github
+    - ../../pkg
+    - ../../cmd
+    - ../../go.mod
     ignored_paths:
-    - .git
-    - .realize
-    - vendor
-    - out
+    - ../../.git
+    - ../../.realize
+    - ../../vendor
+    - ../../out
