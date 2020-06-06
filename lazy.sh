@@ -6,6 +6,6 @@ aws configure set default.region ${AWS_REGION}
 
 $(aws ecr get-login --no-include-email)
 
-docker tag ${IMAGE_NAME} ${REGISTRY_URL}/${IMAGE_NAME}:latest
+docker tag ${IMAGE_NAME} ${REGISTRY_URL}/${IMAGE_NAME}
 
-docker push ${REGISTRY_URL}/${IMAGE_NAME}:latest
+docker push ${REGISTRY_URL}/${IMAGE_NAME}
