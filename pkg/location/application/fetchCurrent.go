@@ -9,6 +9,10 @@ import (
 func (l *LocationUseCase) FetchCurrent(input *domain.Location) *domain.Metadata {
 	now := time.Now()
 
+	if len(input.AllTrips) == 0 {
+		return &input.Base
+	}
+
 	for _, trip := range input.AllTrips {
 		timeZone, _ := time.LoadLocation(trip.TimezoneID)
 
