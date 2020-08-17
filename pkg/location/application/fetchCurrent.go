@@ -19,6 +19,7 @@ func (l *LocationUseCase) FetchCurrent(input *domain.Location) *domain.Metadata 
 		if int64(trip.CheckIn) < now.In(timeZone).Unix() && (&trip.CheckOut != nil || int64(trip.CheckOut) > now.In(timeZone).Unix()) {
 			// current trip
 			input.Current = trip.Steps[len(trip.Steps)-1].Metadata
+			input.Current.Thumbnail = trip.Thumbnail
 		} else {
 			input.Current = input.Base
 		}

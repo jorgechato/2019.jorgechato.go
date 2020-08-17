@@ -15,6 +15,7 @@ type (
 
 	Trip struct {
 		Name         string  `json:"name" polarsteps:"name"`
+		Thumbnail    string  `json:"thumbnail,omitempty" polarsteps:"cover_photo_path" polarsteps_planned:"cover_photo_path"`
 		TimezoneID   string  `json:"timezone_id" polarsteps:"timezone_id" polarsteps_planned:"timezone_id"`
 		ID           int     `json:"-" polarsteps:"id"`
 		CheckIn      float64 `json:"check_in" polarsteps:"start_date" polarsteps_planned:"start_date"`
@@ -36,5 +37,6 @@ type (
 		CountryCode string  `json:"country_code" polarsteps:"country_code" polarsteps_planned:"country_code"`
 		Lat         float64 `json:"lat" polarsteps:"lat" polarsteps_planned:"lat"`
 		Lon         float64 `json:"lon" polarsteps:"lon" polarsteps_planned:"lon"`
+		Thumbnail   string  `json:"thumbnail,omitempty"`
 	}
 )
