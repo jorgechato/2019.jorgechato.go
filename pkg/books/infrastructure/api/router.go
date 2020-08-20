@@ -12,6 +12,6 @@ func Router(BASE string, router *gin.Engine) {
 
 	v := router.Group(BASE + "/books")
 	{
-		v.GET("/", handler.GetBooksByScore)
+		v.GET("", handler.GetBooksByScore)
 	}
 }
