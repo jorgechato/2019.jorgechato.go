@@ -10,7 +10,7 @@ import (
 )
 
 func (h handler) GetNext(ctx *gin.Context) {
-	raw, err := polarsteps.Fetch()
+	raw, err := polarsteps.FetchTrips()
 
 	if err != nil {
 		ctx.AbortWithError(
@@ -24,6 +24,6 @@ func (h handler) GetNext(ctx *gin.Context) {
 
 	ctx.JSON(
 		http.StatusOK,
-		h.locationUseCase.FetchNext(location),
+		h.locationUseCase.GetNext(location),
 	)
 }

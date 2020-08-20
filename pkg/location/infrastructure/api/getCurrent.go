@@ -10,7 +10,7 @@ import (
 )
 
 func (h handler) GetCurrent(ctx *gin.Context) {
-	raw, err := polarsteps.GetProfile()
+	raw, err := polarsteps.FetchProfile()
 
 	if err != nil {
 		ctx.AbortWithError(
@@ -24,6 +24,6 @@ func (h handler) GetCurrent(ctx *gin.Context) {
 
 	ctx.JSON(
 		http.StatusOK,
-		h.locationUseCase.FetchCurrent(location),
+		h.locationUseCase.GetCurrent(location),
 	)
 }
